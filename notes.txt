@@ -1,0 +1,48 @@
+==================
+      BACK END
+==================
+
+http://localhost:5000/posts
+
+
+
+BACKEND - Padrao de Arquitetura - REST or RESTful
+
+protocol://basepath       /resource
+
+http://    localhost:5000 /posts
+
+
+Verbos do HTTP
+         CRUD
+POST   - Create - Criar
+GET    - Read   - Ler
+PUT    - Update - Atualizar
+DELETE - Delete - Apagar
+
+curl -X GET \
+  http://localhost:5000/posts \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: 0036fc45-017c-6729-f896-0041e9aed1b6'
+
+  ===========================
+  FRONT END - funcionalidades
+  ===========================
+
+ 1 - USUARIO PREENCHER OS CAMPOS NO FORMU;ARIO E CLICAR NO ADICIONAR
+ 2 - validateFields - APLICAR UMA VALIDACAO NOS DADOS INSERIDOS (OBRIGATORIEDADE) 
+ 3 - addContact     - GRAVAR OS DADOS DO CONTATO NO BACKEND (POST)
+ 4 - getContacts    - RECUPERAR OS DADOS DO BACKEND (GET) MONTAR A LISTAGEM / TABELA
+ 5 - removeContact  - EXCLUIR OS DADOS DO BACKEND (DELETE) REMOVER UM CONTATO
+
+================================
+ DOM (DOCUMENT OBJECT MODEL API)
+ ===============================
+
+             document
+             /      \
+           head      getElementById()
+           body      getElementsByTagName()
+           forms     getELementsByClassName()
+           links     querySelector()
+           images

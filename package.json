@@ -1,0 +1,20 @@
+{
+  "name": "agenda-master",
+  "version": "1.0.0",
+  "description": "projeto do curso de js",
+  "main": "agenda.js",
+  "scripts": {
+    "front": "lite-server",
+    "back": "json-server --watch db.json --port 5000"
+  },
+  "keywords": [
+    "javascript",
+    "html"
+  ],
+  "author": "Marcus Boggi",
+  "license": "MIT",
+  "dependencies": {
+    "json-server": "^0.16.3",
+    "lite-server": "^2.6.1"
+  }
+}
