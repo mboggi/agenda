@@ -6,11 +6,11 @@ console.log("=== AGENDA ===");
 
     // UI - (User Interface)
     const ui = {
-        fieldName: document.querySelector("#name"),
-        fieldEmail: document.querySelector("#email"),
-        fields: document.querySelectorAll("input"),
-        buttonAdd: document.querySelector(".pure-button-primary"),
-        tableContacts: document.querySelector(".pure-table tbody")
+        fieldName:     document.querySelector("#name"),
+        fieldEmail:    document.querySelector("#email"),
+        fields:        document.querySelectorAll("input"),
+        buttonAdd:     document.querySelector(".pure-button-primary"),
+        tableContacts: document.querySelector(".pure-table tbody"),
     };
 
    // console.log(ui);
@@ -75,7 +75,7 @@ console.log("=== AGENDA ===");
 
     const clearFields = function () {
         ui.fields.forEach(function(field){
-            console.log(field);
+            //console.log(field);
             field.value = "";
         })
         ui.fieldName.focus();
@@ -110,17 +110,21 @@ console.log("=== AGENDA ===");
     };
 
     const getContactsSuccess = function(contacts) {
-        console.table(contacts);
+       // console.table(contacts);
 
         const html = contacts.map(function(contact){
                 
                 return `
                 <tr>
-                    <td>${contact.id}</td>
-                    <td>${contact.name}</td>
-                    <td>${contact.email}</td>
-                    <td>${contact.phone}</td>
-                    <td><a href="#">Excluir</a></td>
+                    <td>${contact.id }</td>
+                    <td>${contact.name }</td>
+                    <td>${contact.email }</td>
+                    <td>${contact.phone }</td>
+                    <td>
+                        <a href="#" data-action="remove" data-id="${contact.id }">Excluir</a> | 
+                        <a href="#" data-action="edit" data-id="${contact.id }">Editar</a>
+
+                    </td>
                 </tr>
             `;
         }).join("");
@@ -128,17 +132,56 @@ console.log("=== AGENDA ===");
         //console.log(html);
 
         ui.tableContacts.innerHTML = html;
-    
+    };
 
+    const handlerAction = function(e) {
+        e.preventDefault();
+        //console.log(e.target.dataset);
+        //console.log(e.target.dataset.action, e.target.dataset.id);
+        
+        //es6 destructuring
+        let { id, action } = e.target.dataset; // { id: 26, action: remove }
+        //console.log(id, action)
 
-};
+        if (action === "remove") {
+            removeContact(id);
+        }
 
-    const removeContact = function() {};
+        if (action === "edit") {
+            editContact(id);
+        }
+
+    };
+
+    const removeContact = function (id) {
+        console.log("deleting...", id);
+        const endpoint = "http://localhost:5000/contacts/" + id;
+        const config = {
+            method: "DELETE",
+            headers: new Headers({"Content-type": "application/json"})
+        };
+
+        fetch(endpoint, config)
+            .then(getContacts)
+            .catch(removeContactError);
+    }
+
+    const removeContactError = function(err) {
+        console.error(err);
+    }
+
+    const editContact = function (id) {
+        console.log("editing...", id);
+    }
 
     // Mapping Events (UI + Actions) juntando as duas partes
     ui.buttonAdd.onclick = validateFields;
+    ui.tableContacts.onclick = handlerAction;
 
     // Initialize
     getContacts();
+
+
+
 
 })();
