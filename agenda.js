@@ -112,7 +112,7 @@ console.log("=== AGENDA ===");
     const getContactsSuccess = function(contacts) {
        // console.table(contacts);
 
-        const html = contacts.map(function(contact){
+        let html = contacts.map(function(contact){
                 
                 return `
                 <tr>
@@ -121,7 +121,7 @@ console.log("=== AGENDA ===");
                     <td>${contact.email }</td>
                     <td>${contact.phone }</td>
                     <td>
-                        <a href="#" data-action="remove" data-id="${contact.id }">Excluir</a> | 
+                        <a href="#" data-email="${contact.email }" data-action="remove" data-id="${contact.id }">Excluir</a> | 
                         <a href="#" data-action="edit" data-id="${contact.id }">Editar</a>
 
                     </td>
@@ -129,7 +129,16 @@ console.log("=== AGENDA ===");
             `;
         }).join("");
 
-        //console.log(html);
+        if (contacts.length === 0) {
+            html = `
+            <tr>
+            <td colspan="5">Sem registros!!!</td>
+            </tr>
+            `
+        }
+        console.log(contacts.length);
+
+
 
         ui.tableContacts.innerHTML = html;
     };
@@ -140,10 +149,10 @@ console.log("=== AGENDA ===");
         //console.log(e.target.dataset.action, e.target.dataset.id);
         
         //es6 destructuring
-        let { id, action } = e.target.dataset; // { id: 26, action: remove }
+        let { id, action, email } = e.target.dataset; // { id: 26, action: remove }
         //console.log(id, action)
 
-        if (action === "remove") {
+        if (action === "remove" && confirm(`Deseja excluir o email: ${email} ?`)) {
             removeContact(id);
         }
 

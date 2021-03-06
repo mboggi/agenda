@@ -1,28 +1,3 @@
 {
-  "contacts": [
-    {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john@doe.com",
-      "phone": "11 9 82292532"
-    },
-    {
-      "name": "Marie Doe",
-      "email": "marie@doe.com",
-      "phone": "21 9 82292532",
-      "id": 2
-    },
-    {
-      "name": "Marcus Vinicius Brandespim Boggi",
-      "email": "mboggi@gmail.com",
-      "phone": "6478863831",
-      "id": 3
-    },
-    {
-      "name": "Teste",
-      "email": "Tets9",
-      "phone": "iwiwiw",
-      "id": 4
-    }
-  ]
+  "contacts": []
 }
